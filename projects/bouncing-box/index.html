@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bouncing Box</title>
+	<script src="jquery.min.js"></script>
+
+	<!-- BEGIN CSS -->
+	<style>
+		/* TODO 1 */
+		[class="box"] {
+			display: block;
+			position: absolute;
+			width: 200px;
+			height: 190px;
+			top: 100px;
+			left: 0px;
+			background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmNpsB5FkRfOxopOHK5Oit7pdIHsCJ4WHN9YUTynl3_i7hqCUh');
+			mix-blend-mode: multiply; 
+			font-size: 300%;
+			text-align: center;
+		}
+		img {
+			width:100%;
+		}
+	</style>
+
+</head>
+<body class="board">
+	<!-- HTML for the box -->
+	<div class="box">?</div>
+	<img src='http://overwatch3d.com/wp-content/uploads/2016/12/temple-of-anubis.jpg'>
+	<!-- BEGIN JAVASCRIPT -->
+	<script>
+		(function(){
+			'use strict'
+			// Variable declarations
+			var box;
+			var boardWidth;
+			var update;
+			var handleBoxClick;
+			// jQuery stuff setup for you
+			box = $('.box');
+			boardWidth = $('.board').width();
+			// TODO 2
+			
+			box.text(points);
+			
+			box.css('left', position);
+			
+			var position;
+			var points;
+			var speed;
+			
+			position = 0;
+			points = 0; 
+			speed = 2; 
+			
+			var direction; 
+			direction = 1;
+			
+			// TODO 3 / 4
+			update = function() {
+			 
+			    if(position > boardWidth) {
+			        direction = -1;
+			    }
+			    
+			   if(position <= -75) {
+			       direction = 1;
+			   }
+			   
+			   position = position + (speed * direction);
+			    
+			    box.css('left', position);
+			    box.text(points);
+			    
+			};
+			// TODO 5 / 6
+			handleBoxClick = function() {
+			    speed = speed + 2;
+			    // I added in a random number generator in order to make the box start in random spots
+			    position = 0 + Math.floor(Math.random() * 1295);
+			    points = points + 1;
+			};
+			//this calls update every 20 milliseconds
+			setInterval(update,20 );
+			// this calls the handle handleBoxClick function every time the box is clicked on
+			box.on('click', handleBoxClick);
+		})();
+	</script>
+</body>
+</html>
